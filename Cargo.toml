@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 readme = "Readme.md"
 license = "MIT"
+description = "A miltr protocol implementation in pure rust"
 
 [workspace]
 members = ["server", "client", "common", "utils"]
