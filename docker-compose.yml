@@ -1,0 +1,7 @@
+services:
+  test:
+    command: cargo test --all
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: builder

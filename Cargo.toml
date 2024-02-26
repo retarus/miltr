@@ -1,0 +1,17 @@
+[package]
+name = "miltr"
+version = "0.1.0"
+edition = "2021"
+readme = "Readme.md"
+license = "MIT"
+
+[workspace]
+members = ["server", "client", "common", "utils"]
+resolver = "2"
+
+[dev-dependencies]
+miltr-common = { path = "common" }
+miltr-server = { path = "server" }
+
+[dependencies]
+async-trait = "0.1.77"

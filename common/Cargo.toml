@@ -1,0 +1,42 @@
+[package]
+name = "miltr-common"
+version = "0.1.0"
+edition = "2021"
+readme = "Readme.md"
+license = "MIT"
+
+# MSRV is considered exempt from SemVer upgrades
+# Current limitation is: "RPITIT Language Feature"
+rust-version = "1.75.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+count-allocations = ["dep:allocation-counter"]
+_fuzzing = []
+
+[dependencies]
+allocation-counter = { version = "0", optional = true }
+bitflags = "2.4.2"
+enum_dispatch = "0.3.12"
+itertools = "0.12.1"
+num_enum = "0.7.2"
+thiserror = "1.0.57"
+asynchronous-codec = "0.7.0"
+bytes = "1.5.0"
+bytecount = "0.6.7"
+miltr-utils = { version = "0.1.0", path = "../utils" }
+
+[dev-dependencies]
+assert_matches = "1.5.0"
+pretty_assertions = "1.4.0"
+tokio = { version = "1.36.0", features = ["full"] }
+rstest = "0.18.2"
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[lints.clippy]
+pedantic = "deny"
+module_name_repetitions = "allow"
+cast-possible-truncation = "allow"
