@@ -2,8 +2,9 @@
 name = "miltr-server"
 version = "0.1.0"
 edition = "2021"
-readme = "Readme.md"
+readme = "../Readme.md"
 license = "MIT"
+description = "A miltr server library in pure rust"
 
 # MSRV is considered exempt from SemVer upgrades
 # Current limitation is: "async-dropper-simple"
