@@ -1,4 +1,4 @@
-# Miltr
+# Miltr Server
 
 This crate is an implementation of the milter protocol used by postfix
 and sendmail.
