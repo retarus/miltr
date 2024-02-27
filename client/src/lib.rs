@@ -1,6 +1,4 @@
-//! A milter client
-//!
-//!
+#![doc = include_str!("../Readme.md")]
 
 mod codec;
 
