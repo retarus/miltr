@@ -1,4 +1,4 @@
-//! Implement en- and decoding individual commands/actions/modifications.
+#![doc = include_str!("../Readme.md")]
 
 pub mod actions;
 pub mod commands;

@@ -1,12 +1,26 @@
+#![doc = include_str!("../Readme.md")]
+
 use std::mem::size_of;
 
 use bytes::{Buf, BytesMut};
 
+/// Safe extensions to methods from [`bytes::BytesMut`].
 pub trait ByteParsing {
+    /// Split at the given delimiter.
+    ///
+    /// Return the split off bytes without the delimiter
     fn delimited(&mut self, delimiter: u8) -> Option<BytesMut>;
+
+    /// Bounds checked variant of [`bytes::BytesMut::split_to`]
     fn safe_split_to(&mut self, at: usize) -> Option<BytesMut>;
+
+    /// Bounds checked variant of [`bytes::BytesMut::split_off`]
     fn safe_split_off(&mut self, at: usize) -> Option<BytesMut>;
+
+    /// Bounds checked variant of [`bytes::BytesMut::get_u8`]
     fn safe_get_u8(&mut self) -> Option<u8>;
+
+    /// Bounds checked variant of [`bytes::BytesMut::get_u32`]
     fn safe_get_u32(&mut self) -> Option<u32>;
 }
 

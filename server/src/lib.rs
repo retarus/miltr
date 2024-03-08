@@ -1,4 +1,4 @@
-//! Protocol logic to be a milter server
+#![doc = include_str!("../Readme.md")]
 
 mod codec;
 mod milter;
@@ -68,14 +68,14 @@ impl<'m, M: Milter> Server<'m, M> {
     /// Handle a single milter connection.
     ///
     /// # Arguments
-    /// - milter: the object implementing [`crate::server::Milter`]. It's methods will
+    /// - milter: the object implementing [`crate::Milter`]. It's methods will
     ///   be called at the appropriate times.
     ///
     /// # Errors
     /// This basically errors for three cases: Io Problems, Codec Problems and
     /// problems returned by the milter implementation.
     ///
-    /// Have a look at [`enum@crate::server::Error`] for more information.
+    /// Have a look at [`enum@crate::Error`] for more information.
     pub async fn handle_connection<RW: AsyncRead + AsyncWrite + Unpin + Send>(
         &mut self,
         socket: RW,

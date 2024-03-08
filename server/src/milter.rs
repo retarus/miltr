@@ -128,7 +128,7 @@ pub trait Milter: Send {
     /// This is the only function not covered by a default. The implementor
     /// needs to reset it's state to handle a new connection.
     ///
-    /// See [`Server::default_postfix`](crate::server::Server::default_postfix).
+    /// See [`Server::default_postfix`](crate::Server::default_postfix).
     #[doc(alias = "SMFIC_ABORT")]
     #[doc(alias = "xxfi_abort")]
     async fn abort(&mut self) -> Result<Action, Self::Error>;
@@ -138,7 +138,7 @@ pub trait Milter: Send {
     /// Some clients (postfix) do not call this method and instead call
     /// `abort` with the expectation the connection is closed.
     ///
-    /// See [`Server::default_postfix`](crate::server::Server::default_postfix).
+    /// See [`Server::default_postfix`](crate::Server::default_postfix).
     #[doc(alias = "SMFIC_QUIT")]
     #[doc(alias = "xxfi_close")]
     async fn quit(&mut self) -> Result<(), Self::Error> {
