@@ -18,6 +18,7 @@ pub use self::to_mta_only::{Discard, Reject, Replycode, Skip, Tempfail};
 /// See the contained variants for more.
 #[allow(missing_docs)]
 #[enum_dispatch]
+#[cfg_attr(feature = "tracing", derive(strum::Display))]
 #[derive(Debug, Clone)]
 pub enum Action {
     Continue,

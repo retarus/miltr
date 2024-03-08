@@ -155,6 +155,7 @@ impl ModificationResponseBuilder {
 
 /// The container of possible milter modification actions
 #[enum_dispatch]
+#[cfg_attr(feature = "tracing", derive(strum::Display))]
 #[derive(Debug, Clone)]
 pub enum ModificationAction {
     /// Add recipient

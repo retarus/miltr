@@ -2,6 +2,7 @@
 
 use tokio::net::TcpStream;
 use tokio_util::compat::TokioAsyncReadCompatExt;
+use tracing_subscriber::{fmt, EnvFilter, prelude::*};
 
 use miette::{IntoDiagnostic, Result};
 
@@ -13,6 +14,11 @@ use miltr_common::{
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    tracing_subscriber::registry()
+        .with(fmt::layer())
+        .with(EnvFilter::from_default_env())
+        .init();
+
     let mut stream = TcpStream::connect("localhost:8080")
         .await
         .expect("Failed connecting to milter server")

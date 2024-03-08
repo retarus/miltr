@@ -16,6 +16,9 @@ use miltr_common::{
     encoding::ServerMessage,
     optneg::{Capability, OptNeg},
 };
+use miltr_utils::debug;
+#[cfg(feature = "tracing")]
+use tracing::instrument;
 
 pub(crate) use self::codec::MilterCodec;
 
@@ -76,6 +79,7 @@ impl<'m, M: Milter> Server<'m, M> {
     /// problems returned by the milter implementation.
     ///
     /// Have a look at [`enum@crate::Error`] for more information.
+    #[cfg_attr(feature = "tracing", instrument(skip_all))]
     pub async fn handle_connection<RW: AsyncRead + AsyncWrite + Unpin + Send>(
         &mut self,
         socket: RW,
@@ -85,7 +89,10 @@ impl<'m, M: Milter> Server<'m, M> {
         let mut options: Option<OptNeg> = Option::None;
 
         while let Some(command) = framed.next().await {
-            match command? {
+            let command = command?;
+            debug!("Received {}", command);
+
+            match command {
                 // First, all the regular smtp related commands
                 ClientCommand::Helo(helo) => {
                     Self::notify_respond_answer(self.milter.helo(helo), &mut framed).await?;
@@ -134,6 +141,7 @@ impl<'m, M: Milter> Server<'m, M> {
                     // And send them back
                     let responses: Vec<ServerMessage> = responses.into();
                     for response in responses {
+                        debug!("Sending response");
                         framed.send(&response).await?;
                     }
                 }

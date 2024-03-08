@@ -36,6 +36,7 @@ macro_rules! parse_command {
     ($container_name:ident, $($variant:ident),+$(,)?) => {
         /// See the contained variants for more.
         #[allow(missing_docs)]
+        #[cfg_attr(feature = "tracing", derive(strum::Display))]
         #[enum_dispatch]
         #[derive(Debug, Clone)]
         pub enum $container_name {
