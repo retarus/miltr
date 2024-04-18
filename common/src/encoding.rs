@@ -56,8 +56,8 @@ impl Display for ServerMessage {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             ServerMessage::Optneg(_optneg) => write!(f, "Optneg"),
-            ServerMessage::Action(action) => write!(f, "Action/{}", action),
-            ServerMessage::ModificationAction(mod_action) => write!(f, "ModificationAction/{}", mod_action),
+            ServerMessage::Action(action) => write!(f, "Action/{action}"),
+            ServerMessage::ModificationAction(mod_action) => write!(f, "ModificationAction/{mod_action}"),
         }
     }
 }
@@ -81,8 +81,8 @@ impl Display for ClientMessage {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             ClientMessage::Optneg(_optneg) => write!(f, "Optneg"),
-            ClientMessage::Action(action) => write!(f, "Action/{}", action),
-            ClientMessage::Command(command) => write!(f, "Command/{}", command),
+            ClientMessage::Action(action) => write!(f, "Action/{action}"),
+            ClientMessage::Command(command) => write!(f, "Command/{command}"),
         }
     }
 }
