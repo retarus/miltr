@@ -1,5 +1,8 @@
 //! Implement what components may write to the wire
 
+#[cfg(feature = "tracing")]
+use std::fmt::{self, Display};
+
 use bytes::BytesMut;
 use enum_dispatch::enum_dispatch;
 
@@ -48,6 +51,17 @@ pub enum ServerMessage {
     ModificationAction,
 }
 
+#[cfg(feature = "tracing")]
+impl Display for ServerMessage {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            ServerMessage::Optneg(_optneg) => write!(f, "Optneg"),
+            ServerMessage::Action(action) => write!(f, "Action/{action}"),
+            ServerMessage::ModificationAction(mod_action) => write!(f, "ModificationAction/{mod_action}"),
+        }
+    }
+}
+
 /// Messages sent by the Client
 ///
 /// This is used to decode things sent by the client and received by the server.
@@ -60,4 +74,15 @@ pub enum ClientMessage {
     Action,
     /// SMTP commands reported by the client
     Command,
+}
+
+#[cfg(feature = "tracing")]
+impl Display for ClientMessage {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            ClientMessage::Optneg(_optneg) => write!(f, "Optneg"),
+            ClientMessage::Action(action) => write!(f, "Action/{action}"),
+            ClientMessage::Command(command) => write!(f, "Command/{command}"),
+        }
+    }
 }

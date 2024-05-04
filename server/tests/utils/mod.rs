@@ -32,7 +32,7 @@ pub async fn send_mail(rcpts: &str) -> Result<()> {
             "-f",
             "monitoring@blackhole.com",
             "--server",
-            "localhost:25",
+            "127.0.0.1:25",
         ])
         .stdout(Stdio::null())
         .spawn()

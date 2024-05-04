@@ -62,3 +62,23 @@ impl ByteParsing for BytesMut {
         Some(self.get_u32())
     }
 }
+
+#[macro_export]
+macro_rules! debug {
+    ($($arg:tt)+) => {
+        #[cfg(feature = "tracing")]
+        {
+            tracing::debug!($($arg)+);
+        }
+    }
+}
+
+#[macro_export]
+macro_rules! trace {
+    ($($arg:tt)+) => {
+        #[cfg(feature = "tracing")]
+        {
+            tracing::trace!($($arg)+);
+        }
+    }
+}

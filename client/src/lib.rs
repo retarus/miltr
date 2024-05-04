@@ -9,8 +9,12 @@ use std::{ops::Deref, sync::Arc};
 
 use asynchronous_codec::Framed;
 use futures::{AsyncRead, AsyncWrite, SinkExt, StreamExt};
+use miltr_utils::debug;
 use paste::paste;
 use thiserror::Error;
+#[cfg(feature = "tracing")]
+use tracing::{instrument, Level};
+
 
 use miltr_common::{
     actions::{Abort, Action, Quit},
@@ -321,18 +325,22 @@ impl<RW: AsyncRead + AsyncWrite + Unpin> Connection<RW> {
     );
 
     /// Send a command to the server respecting protocol settings
+    #[cfg_attr(feature = "tracing", instrument(level = Level::DEBUG, skip(self), fields(%command), err))]
     async fn send_command(&mut self, command: Command) -> Result<(), ResponseError> {
-        // Eval skips
+    // Eval skips
         if self.options.protocol.should_skip_send(&command) {
+            debug!("Skip sending");
             return Ok(());
         }
         let skip_response = self.options.protocol.should_skip_response(&command);
 
         // Send it
+        debug!("Sending command");
         self.framed.send(&command.into()).await?;
 
         // Check response
         if skip_response {
+            debug!("Skip receiving response");
             return Ok(());
         }
         self.expect_continue().await

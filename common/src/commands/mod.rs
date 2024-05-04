@@ -26,6 +26,7 @@ pub use self::unknown::Unknown;
 /// See the respective contents about documentation
 #[allow(missing_docs)]
 #[enum_dispatch]
+#[cfg_attr(feature = "tracing", derive(strum::Display))]
 #[derive(Debug)]
 pub enum Command {
     // SMTP opening

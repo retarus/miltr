@@ -1,17 +1,18 @@
 //! A milter that prints callback arguments and macros for each stage.
 
-use std::env;
 use async_trait::async_trait;
+use std::env;
 use tokio::net::TcpListener;
 use tokio_util::compat::TokioAsyncReadCompatExt;
+use tracing_subscriber::{fmt, EnvFilter, prelude::*};
 
-use miltr_server::{Milter, Server, Error};
 use miltr_common::{
-        actions::{Action, Continue},
-        commands::{Body, Connect, Header, Helo, Macro, Mail, Recipient, Unknown},
-        modifications::ModificationResponse,
-        optneg::OptNeg,
+    actions::{Action, Continue},
+    commands::{Body, Connect, Header, Helo, Macro, Mail, Recipient, Unknown},
+    modifications::ModificationResponse,
+    optneg::OptNeg,
 };
+use miltr_server::{Error, Milter, Server};
 
 struct PrintMilter;
 
@@ -130,6 +131,11 @@ impl Milter for PrintMilter {
 
 #[tokio::main]
 async fn main() {
+    tracing_subscriber::registry()
+        .with(fmt::layer())
+        .with(EnvFilter::from_default_env())
+        .init();
+
     let addr = env::var("LISTEN_ADDR").unwrap_or("0.0.0.0:8080".to_string());
     let listener = TcpListener::bind(&addr)
         .await

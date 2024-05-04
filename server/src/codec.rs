@@ -5,6 +5,7 @@ use miltr_common::decoding::ClientCommand;
 use miltr_common::encoding::ServerMessage;
 use miltr_common::encoding::Writable;
 use miltr_common::ProtocolError;
+use miltr_utils::trace;
 
 /// The `MilterCodec` is responsible for decoding from and encoding to bits on
 /// the wire from structs provided by this crate.
@@ -55,6 +56,8 @@ impl Decoder for &mut MilterCodec {
         let mut parse_buf = src.split_to(4 + length);
         parse_buf.advance(4);
 
+        trace!(length = parse_buf.len(), "Read bytes from the network");
+
         Ok(Some(ClientCommand::parse(parse_buf)?))
     }
 }
@@ -86,6 +89,9 @@ impl Encoder for &mut MilterCodec {
         dst.extend_from_slice(&packet_len_be);
         dst.put_u8(item.code());
         item.write(dst);
+
+        trace!(length = dst.len(), "Wrote bytes to the network");
+
         Ok(())
     }
 }
