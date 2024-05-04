@@ -11,6 +11,7 @@ members = ["server", "client", "common", "utils"]
 resolver = "2"
 
 [dev-dependencies]
+escargot = "0.5.10"
 miltr-common = { path = "common" }
 miltr-server = { path = "server" }
 
