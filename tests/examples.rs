@@ -5,7 +5,7 @@ fn client_v_server() {
         .current_release()
         .current_target()
         .manifest_path("./server/Cargo.toml")
-        .example("print")
+        .example("print_server")
         .run()
         .expect("Failed building client");
     let mut server = server.command().spawn().expect("Failed running print example");
@@ -15,7 +15,7 @@ fn client_v_server() {
         .current_release()
         .current_target()
         .manifest_path("./client/Cargo.toml")
-        .example("print")
+        .example("print_client")
         .run()
         .expect("Failed building client");
 
