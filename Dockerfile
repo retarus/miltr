@@ -4,7 +4,6 @@ RUN mkdir /workspace
 WORKDIR /workspace
 
 RUN cargo install \
-    cargo-fuzz \
     cargo-chef
 
 # Install dependencies

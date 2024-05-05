@@ -1,0 +1,11 @@
+name: run-dockerized-tests
+on: [push, pull_request]
+jobs:
+  dockerized-tests:
+    runs-on: ubuntu-latest
+    steps:
+      # need checkout before using compose-action
+      - uses: actions/checkout@v3
+      - uses: hoverkraft-tech/compose-action@v2.0.0
+        with:
+          compose-file: "./docker-compose.yml"
