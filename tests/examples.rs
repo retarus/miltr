@@ -8,7 +8,10 @@ fn client_v_server() {
         .example("print_server")
         .run()
         .expect("Failed building client");
-    let mut server = server.command().spawn().expect("Failed running print example");
+    let mut server = server
+        .command()
+        .spawn()
+        .expect("Failed running print example");
 
     println!("Build and start the client");
     let client = escargot::CargoBuild::new()
@@ -19,10 +22,15 @@ fn client_v_server() {
         .run()
         .expect("Failed building client");
 
-    let exit_status = client.command().status().expect("Failed running print example");
+    let exit_status = client
+        .command()
+        .status()
+        .expect("Failed running print example");
 
     // shutdown server
-    server.kill().expect("Failed killing server process in test");
+    server
+        .kill()
+        .expect("Failed killing server process in test");
 
     if !exit_status.success() {
         panic!("Client failed with status {}", exit_status);

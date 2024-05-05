@@ -90,25 +90,25 @@ const MACRO_STAGE_MAX_ID: usize = 9;
 #[derive(Debug, Copy, Clone, IntoPrimitive, PartialEq, Eq)]
 #[repr(u32)]
 pub enum MacroStage {
-    /// SMFIM_CONNECT
+    /// `SMFIM_CONNECT`
     Connect = 0,
-    /// SMFIM_HELO
+    /// `SMFIM_HELO`
     Helo = 1,
-    /// SMFIM_ENVFROM
+    /// `SMFIM_ENVFROM`
     MailFrom = 2,
-    /// SMFIM_ENVRCPT
+    /// `SMFIM_ENVRCPT`
     RcptTo = 3,
-    /// SMFIM_DATA
+    /// `SMFIM_DATA`
     Data = 4,
-    /// SMFIM_EOB
+    /// `SMFIM_EOB`
     EndOfBody = 5,
-    /// SMFIM_EOH
+    /// `SMFIM_EOH`
     EndOfHeaders = 6,
-    /// SMFIC_EOH
+    /// `SMFIC_EOH`
     Header = 7,
-    /// SMFIM_BODY
+    /// `SMFIM_BODY`
     Body = 8,
-    /// SMFIC_UNKNOWN
+    /// `SMFIC_UNKNOWN`
     Unknown = MACRO_STAGE_MAX_ID as u32,
 }
 

@@ -123,7 +123,7 @@ mod test {
             let res = Helo::parse(buffer);
 
             allocation_counter::opt_out(|| {
-                println!("{:?}", res);
+                println!("{res:?}");
                 assert!(res.is_ok());
             });
         });
@@ -134,7 +134,7 @@ mod test {
             let res = Helo::parse(buffer);
 
             allocation_counter::opt_out(|| {
-                println!("{:?}", res);
+                println!("{res:?}");
                 assert!(res.is_err());
             });
         });

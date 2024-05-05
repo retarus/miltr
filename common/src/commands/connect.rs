@@ -205,7 +205,7 @@ mod tests {
         let info = allocation_counter::measure(|| {
             let res = Connect::parse(buffer);
             allocation_counter::opt_out(|| {
-                println!("{:?}", res);
+                println!("{res:?}");
                 assert!(res.is_ok());
             });
         });

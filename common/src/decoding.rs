@@ -45,7 +45,7 @@ macro_rules! parse_command {
 
         impl $container_name {
             /// Parse a bytes buffer into this structured data
-            /// 
+            ///
             /// # Errors
             /// This fn may return errors if the received data did not match
             /// valid data for this command.
