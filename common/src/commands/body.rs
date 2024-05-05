@@ -114,7 +114,7 @@ mod test {
         let info = allocation_counter::measure(|| {
             let res = Body::parse(buffer);
             allocation_counter::opt_out(|| {
-                println!("{:?}", res);
+                println!("{res:?}");
                 assert!(res.is_ok());
             });
         });

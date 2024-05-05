@@ -159,12 +159,12 @@ mod test {
             let res = Header::parse(buffer);
 
             allocation_counter::opt_out(|| {
-                println!("{:?}", res);
+                println!("{res:?}");
                 assert!(res.is_ok());
             });
         });
 
-        println!("{:#?}", info);
+        println!("{info:#?}");
         assert_eq!(info.count_total, 1);
     }
 }
