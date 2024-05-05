@@ -191,6 +191,7 @@ mod tests {
     }
 
     #[cfg(feature = "count-allocations")]
+    #[allow(clippy::type_complexity)] // Small function, well named return vars
     fn create_optneg_from_bytes() -> (BytesMut, ([u8; 4], [u8; 4], [u8; 4])) {
         let mut buffer = BytesMut::new();
 
