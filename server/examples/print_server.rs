@@ -4,7 +4,7 @@ use async_trait::async_trait;
 use std::env;
 use tokio::net::TcpListener;
 use tokio_util::compat::TokioAsyncReadCompatExt;
-use tracing_subscriber::{fmt, EnvFilter, prelude::*};
+use tracing_subscriber::{fmt, prelude::*, EnvFilter};
 
 use miltr_common::{
     actions::{Action, Continue},

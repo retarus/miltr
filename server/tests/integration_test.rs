@@ -5,19 +5,19 @@ use std::{
 
 use async_trait::async_trait;
 use miette::{miette, Context, ErrReport, Result};
-use miltr_server::{Milter, Error};
 use miltr_common::{
-        actions::{Action, Continue},
-        commands::Macro,
-        modifications::{
-            body::ReplaceBody,
-            headers::{AddHeader, ChangeHeader, InsertHeader},
-            quarantine::Quarantine,
-            recipients::{AddRecipient, DeleteRecipient},
-            ModificationResponse,
-        },
-        optneg::{MacroStage, OptNeg},
+    actions::{Action, Continue},
+    commands::Macro,
+    modifications::{
+        body::ReplaceBody,
+        headers::{AddHeader, ChangeHeader, InsertHeader},
+        quarantine::Quarantine,
+        recipients::{AddRecipient, DeleteRecipient},
+        ModificationResponse,
+    },
+    optneg::{MacroStage, OptNeg},
 };
+use miltr_server::{Error, Milter};
 use once_cell::sync::Lazy;
 use tokio::{
     process::Command,
@@ -29,7 +29,7 @@ use tokio_retry::{
 };
 use utils::wait_for_file;
 
-use crate::utils::{testcase::TestCase, send_mail, remove_dir_contents};
+use crate::utils::{remove_dir_contents, send_mail, testcase::TestCase};
 
 mod utils;
 

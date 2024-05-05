@@ -1,7 +1,7 @@
 //! A milter that prints callback arguments and macros for each stage.
 
-use std::env;
 use async_trait::async_trait;
+use std::env;
 use tokio::net::TcpListener;
 use tokio_util::compat::TokioAsyncReadCompatExt;
 

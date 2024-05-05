@@ -104,6 +104,8 @@ mod test {
         let mut input = BytesMut::from_iter([0, 0, 0, 4, 109, 255, 255, 7]);
 
         let mut codec = MilterCodec::new(2_usize.pow(16));
-        let _output = codec.decode(&mut input).expect_err("This is not enough data");
+        let _output = codec
+            .decode(&mut input)
+            .expect_err("This is not enough data");
     }
 }

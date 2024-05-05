@@ -57,7 +57,9 @@ impl Display for ServerMessage {
         match self {
             ServerMessage::Optneg(_optneg) => write!(f, "Optneg"),
             ServerMessage::Action(action) => write!(f, "Action/{action}"),
-            ServerMessage::ModificationAction(mod_action) => write!(f, "ModificationAction/{mod_action}"),
+            ServerMessage::ModificationAction(mod_action) => {
+                write!(f, "ModificationAction/{mod_action}")
+            }
         }
     }
 }

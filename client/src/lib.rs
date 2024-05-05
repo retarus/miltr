@@ -15,7 +15,6 @@ use thiserror::Error;
 #[cfg(feature = "tracing")]
 use tracing::{instrument, Level};
 
-
 use miltr_common::{
     actions::{Abort, Action, Quit},
     commands::{
@@ -327,7 +326,7 @@ impl<RW: AsyncRead + AsyncWrite + Unpin> Connection<RW> {
     /// Send a command to the server respecting protocol settings
     #[cfg_attr(feature = "tracing", instrument(level = Level::DEBUG, skip(self), fields(%command), err))]
     async fn send_command(&mut self, command: Command) -> Result<(), ResponseError> {
-    // Eval skips
+        // Eval skips
         if self.options.protocol.should_skip_send(&command) {
             debug!("Skip sending");
             return Ok(());

@@ -3,12 +3,12 @@ use std::env;
 
 use async_trait::async_trait;
 use miette::{IntoDiagnostic, Result, WrapErr};
-use miltr_server::{Milter, Server, Error};
 use miltr_common::{
     actions::{Action, Continue},
     commands::{Body, Recipient},
-    optneg::{OptNeg, Protocol, Capability},
+    optneg::{Capability, OptNeg, Protocol},
 };
+use miltr_server::{Error, Milter, Server};
 use tokio::net::TcpListener;
 use tokio_util::compat::TokioAsyncReadCompatExt;
 

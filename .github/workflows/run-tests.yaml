@@ -1,15 +1,6 @@
 name: run-dockerized-tests
 on: [push, pull_request]
 jobs:
-  dockerized-tests:
-    runs-on: ubuntu-latest
-    steps:
-      # need checkout before using compose-action
-      - uses: actions/checkout@v3
-      - name: build
-        run : docker compose -f ./docker-compose.yml build
-      - name: Run tests
-        run : docker compose -f ./docker-compose.yml run test
   format:
     name: Format & Clippy
     runs-on: ubuntu-latest
@@ -20,3 +11,13 @@ jobs:
         run: cargo fmt --all --check
       - name: Clippy
         run: cargo clippy --all-targets --all-features --workspace
+
+  dockerized-tests:
+    runs-on: ubuntu-latest
+    steps:
+      # need checkout before using compose-action
+      - uses: actions/checkout@v3
+      - name: build
+        run : docker compose -f ./docker-compose.yml build
+      - name: Run tests
+        run : docker compose -f ./docker-compose.yml run test
