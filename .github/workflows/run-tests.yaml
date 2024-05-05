@@ -10,3 +10,12 @@ jobs:
         run : docker compose -f ./docker-compose.yml build
       - name: Run tests
         run : docker compose -f ./docker-compose.yml run test
+  format:
+    name: Format & Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: moonrepo/setup-rust@v1
+      - name: Check formatting
+        run: cargo fmt --all --check
+      - name: Clippy
+        run: cargo clippy --all-targets --all-features --workspace
